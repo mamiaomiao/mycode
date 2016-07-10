@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电商</title>
+	<link rel="stylesheet" href="css.css">
+	
+</head>
+<body ng-app="myapp">
+	<div class="head">
+		<form action="">
+			<img src="images/logo.png" alt="">
+			<input type="text" placeholder="714美的超级品牌日，万券齐发！">
+		</form>
+		<div class="lunbo">
+			<ul>
+				<li><div>1</div></li>
+				<li><div>2</div></li>
+				<li><div>3</div></li>
+				<li><div>4</div></li>
+				<li><div>5</div></li>
+				<li><div>6</div></li>
+				<li><div>7</div></li>
+				<li><div>8</div></li>
+			</ul>
+			<ol>
+				<li class="current"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ol>
+		</div>	
+	</div>
+	<div ng-controller="goodsListController" class="goodsListController">
+		<h2 class="title">商品列表</h2>
+		<ul>
+			<li ng-repeat="item in goods">
+				<img ng-src="{{item.url}}" alt="">
+				<p ng-bind="item.name"></p>
+				<p>￥：<span>{{item.price}}</span>
+					<button class="btn" ng-click="buy(item.id)">加入购物车</button>
+				</p>
+			</li>
+			<div class="clear"></div>
+		</ul>
+		<div class="cart">
+				<ul>
+					<li class="current1"><img src="images/shouye.png" alt=""><br>首页</li>
+					<li><img src="images/g.png" alt="" ng-click="selectCart()"><br>购物车
+						<div class="num">{{getCartNum()}}</div>
+
+					</li>
+					<li><img src="images/mine.png" alt="" id="show"><br>我的</li>
+				</ul>
+		</div>
+		
+		<div id="cartnone">
+			<div class="info" ng-show="cartBlockNone">
+				<div>
+					<button style="float: right;background:#FF6100;color: #fff;border: none;border: 1px solid #fff;border-radius: 50%;" onclick="noneCart()">X</button>
+				</div>
+				没有宝贝，速去选购！
+			</div>
+			<table ng-hide="cartBlockNone">
+				<tr>
+					<td colspan="5"><h3 style="color: red">请君查看选购的宝贝~</h3></td>
+					<td><button onclick="noneCart()" style="width:30px;height:30px;color:#fff;background:red;border: 1px solid red;border-radius:30%;">关闭</button></td>
+				</tr>
+				<tr>
+					<td style="color: green;">产品缩略图</td>
+					<td style="color: green;">产品名称</td>
+					<td style="color: green;">单价</td>
+					<td style="color: green;">总价</td>
+					<td style="color: green;">数量</td>
+					<td style="color: green;">操作</td>
+				</tr>
+				<tr ng-repeat="item in cartList">
+					<td><img ng-src="{{item.url}}"  alt=""></td>
+					<td>{{item.name}}</td>
+					<td ng-bind="item.price"></td>
+					<td>{{item.price*item.num}}</td>
+					<td>
+						<button ng-click="jian(item.id)" style="background: green;color: #fff;border: none;width: 20px;height: 20px;"> - </button>
+						<input type="text" ng-model="item.num">
+						<button ng-click="add(item.id)" style="background: green;color: #fff;border: none;width: 20px;height: 20px;"> + </button>
+					</td>
+					<td><button ng-click="remove(item.id)"style="width:30px;height:30px;color:#fff;background:red;border: 1px solid red;border-radius:30%;">删除</button></td>
+				</tr>
+				<tr>
+					<td style="color: green;">订单汇总</td>
+					<td style="color: green;">订单总价</td>
+					<td style="color: red;">{{totalPrice()}}</td>
+					<td style="color: green;">商品总数</td>
+					<td style="color: red;">{{getCartNum()}}</td>
+					<td><button ng-click="clearCart()" style="width:30px;height:30px;color:#fff;background:red;border: 1px solid red;border-radius:30%;">清空</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="popWindow hide">
+		<h3>欢迎来到登录页面<span>关闭</span></h3>
+		<form class="content">
+			账号：<input type="text"><br>
+			密码：<input type="password"><br>
+			<input type="submit" value="登录">
+			<input type="reset" value="注册">
+		</form>
+	</div>
+
+	<script src="jquery-1.11.1/jquery.min.js"></script>
+	<script src="js.js"></script>
+	<script src="angularjs.js"></script>
+	<script>
+		//声明模块
+		angular.module('myapp',[])
+		//控制器
+		.controller('goodsListController',function($scope){
+			$scope.goods=[
+				{id:0,name:'全球通 榴莲饼',price:29.9,url:'images/01.jpg'},
+				{id:1,name:'奥利奥巧克力棒',price:39.9,url:'images/02.jpg'},
+				{id:2,name:'时尚中国风男士足银指',price:168.00,url:'images/03.jpg'},
+				{id:3,name:'意大利进口饼干',price:28.5,url:'images/04.jpg'},
+				{id:4,name:'个性时尚男士表',price:29.9,url:'images/05.jpg'},
+				{id:5,name:'西部数据 蓝盘',price:329.00,url:'images/06.jpg'},
+				{id:6,name:'金利来 为不凡而生',price:600.90,url:'images/07.jpg'},
+				{id:7,name:'VR虚拟现实',price:129.9,url:'images/08.jpg'},
+				{id:8,name:'小米note全网通',price:1499,url:'images/09.jpg'},
+				{id:9,name:'乐帆TVR看电视',price:2299.9,url:'images/10.jpg'},
+				{id:10,name:'性感欧洲杯',price:99.9,url:'images/11.jpg'},
+				{id:11,name:'香奈儿时尚包',price:339.9,url:'images/12.jpg'},
+				{id:12,name:'度假连衣裙',price:59.9,url:'images/13.jpg'},
+				{id:13,name:'国际大牌 夏季上新',price:29.9,url:'images/14.jpg'},
+				{id:14,name:'大牌洗护',price:29.9,url:'images/15.jpg'},
+			];
+			// 购物车数组
+			$scope.cartList = {};
+
+			$scope.buy = function(id){
+				var index = getIndex(id,$scope.goods);
+
+				$scope.cartList['a'+index] = $scope.goods[index];
+
+				if($scope.cartList['a'+index].num==undefined){
+					$scope.cartList['a'+index].num = 1;					
+				}else{
+					++$scope.cartList['a'+index].num;
+				}
+
+				console.log($scope.cartList)
+			}
+
+			// 购物车的商品总数
+			$scope.getCartNum = function(){
+				var num = 0;
+				angular.forEach($scope.cartList,function(item,key){
+					num +=  parseInt(item.num);
+				});
+
+				return num;
+			}
+			// 用 产品 id 获得 在 $scope.goods 数组里对应的 key
+			function getIndex(id,obj){
+				var index = 0;
+				angular.forEach(obj,function(item,key){
+					if(id==item.id){
+						index = key;
+					}
+				});
+				return index;
+			}
+			// 订单总价
+			$scope.totalPrice = function(){
+				var total = 0;
+				angular.forEach($scope.cartList,function(item){
+					total += item.price*item.num;
+				})
+				return total;
+			}
+			// 删除指定的商品
+			$scope.remove = function(id){
+				var index =  getIndex(id,$scope.cartList);
+				delete $scope.cartList[index];
+			}
+			// 添加商品数量
+			$scope.add = function(id){
+				var index =  getIndex(id,$scope.cartList);
+				++$scope.cartList[index].num;
+
+			}
+				// 减少商品数量
+			$scope.jian = function(id){
+				var index =  getIndex(id,$scope.cartList);
+				var num = $scope.cartList[index].num;
+
+				if(num>1){
+					--$scope.cartList[index].num;
+				}else{
+					// 如果商品数量为 0 就把商品从购物车中清除
+
+					$scope.remove(id)
+
+					if($scope.getCartNum()){
+						$scope.cartBlockNone = false;
+					}else{
+						// 没有商品
+						$scope.cartBlockNone = true;
+					}
+
+
+				}
+			}
+				// 清空购物车
+			$scope.clearCart = function(){
+				$scope.cartBlockNone = true;
+				angular.forEach($scope.cartList,function(item){
+					item.num = 0;
+				});
+
+
+
+				$scope.cartList = {};
+			}
+				// 打开购物车的弹框
+			$scope.selectCart = function(){
+
+				// alert($scope.getCartNum());
+
+				if($scope.getCartNum()){
+					$scope.cartBlockNone = false;
+				}else{
+					// 没有商品
+					$scope.cartBlockNone = true;
+				}
+
+				document.getElementById('cartnone').style.display = 'block';
+			}
+
+		});
+		function noneCart(){
+			document.getElementById('cartnone').style.display = 'none';
+		}
+
+		var oCartLi=$('.cart ul li');
+		oCartLi.click(function(){
+			$(this).addClass('current1').siblings().removeClass();
+		});
+
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+*{margin: 0;padding: 0;}
+ul,ol{list-style: none;}
+.head{width: 80%;margin: 0 auto;background-color: red;position: relative;}
+.head form{width: 100%;position: absolute;left:5%;top: 0;z-index: 2;}
+.head form input{width: 80%;height:30px;border-radius:20px;border: 1px solid #916B64;}
+.head .lunbo{width:100%;overflow: hidden;position: absolute;left: 0;top: 0;z-index: 1;}
+.head .lunbo ul{width: 870%;overflow: hidden;position: relative;}
+.head .lunbo ul li{width:12.5%;height:350px;float: left;}
+.head .lunbo ul li div{width:100%;height:350px;}
+.lunbo ol li{width: 10px;height: 10px;border-radius: 50%;border: 1px solid #fff;margin-left: 5px;float: left;cursor: pointer;}
+.lunbo ol{position: absolute;left:44%;top:90%;}
+.current{background: #fff;}
+
+
+.goodsListController{width: 80%;margin: 0 auto;position:absolute;top:54%;left: 10%;}
+.goodsListController h2.title{color:green;text-align:center;margin-top: 10px;width: 100%;height: 50px;line-height: 50px;}
+.goodsListController ul li{float:left;width:33%;text-align:center;margin-top: 30px;}
+.goodsListController ul li img{width:160px;}
+.goodsListController ul li p{margin-top: 10px;}
+.goodsListController ul li p span{color:red;}
+
+.cart{width:4%;height:35%;box-shadow: -5px -5px 10px #FCFBFB;position:fixed;bottom:5%;right:5px;}
+.cart ul{width: 100%;height: 100%;}
+.cart ul li{width:100%;height:16%;font-size: 5px;margin-top:25px;cursor: pointer;text-align: center;margin-top: 20px;}
+.cart ul li img{width:60%;height: 90%;}
+.current1{color: #F12E2E;font-weight: 800;}
+.cart .num{width:15px;height:15px;background:green;border-radius: 50%;position:fixed;left: 95%;top: 73%;color: #fff;font-size: 10px;opacity: 0.5;}
+/*弹窗的购物车信息*/
+#cartnone{display: none;background-color:rgba(0,0,0,0.4);position: fixed;top:0;left:0;right:0;bottom:0;z-index:10;}
+#cartnone table{background: #fff;margin:0 auto;width: 60%;height: 100%;}
+#cartnone table tr{height: 10%;text-align: center;}
+#cartnone table tr td img{width: 50px;height: 50px;}
+#cartnone table tr input{width:30px;}
+#cartnone .info{color: #fff;margin:0 auto;width:10%;background:#FF6100;position: fixed;top: 70%;right: 5%;font-size: 10px;}
+.btn{width: 100px;height: 30px;cursor: pointer;border-radius: 15px;background: green;color: #fff;}
+.btn:hover{background:#F13030;color: #fff;border-radius: 15px;}
+/*登录页面*/
+.hide{display: none;}
+.popWindow{
+	width: 400px;
+	height: 400px;
+	background: #abcdef;
+	padding: 2px;
+	margin: 10px;
+	position: absolute;
+	left:0;
+	top: 0;
+	z-index:12;
+	/*border: 2px solid #abcdef;*/
+}
+
+.popWindow h3{
+	height: 50px;
+	line-height:50px;
+}
+
+.popWindow h3 span{
+	float: right;
+	font-size: 14px;
+	font-weight:800;
+	cursor: pointer;
+}
+
+.popWindow h3 span:hover{
+	color: #f00;
+}
+
+.popWindow .content{
+	height: 350px;
+	background: #fff;
+}
+
+.mask{
+	background-color:rgba(0,0,0,0.4);position: fixed;top:0;left:0;right:0;bottom:0;z-index:10;
+}
+.popWindow form input[type=text]{width:70%;height: 30px;margin-top:10%;}
+.popWindow form input[type=password]{width:70%;height: 30px;margin-top:5%;}
+.popWindow form input[type=submit]{margin-left: 15%;
+  margin-right: 15%;
+  width: 15%;
+  height: 30px;
+  margin-top: 6%;}
+  .popWindow form input[type=reset]{margin-left: 15%;
+  margin-right: 15%;
+  width: 15%;
+  height: 30px;
+  margin-top: 6%;}
